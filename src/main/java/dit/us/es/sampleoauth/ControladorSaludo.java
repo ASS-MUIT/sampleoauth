@@ -1,5 +1,7 @@
 /**
- * 
+ * Basado en el tutorial
+ * https://is.docs.wso2.com/en/7.0.0/quick-starts/springboot/
+ * para la creación de aplicaciones springboot clientes oauth de is de wso2
  */
 package dit.us.es.sampleoauth;
 
@@ -18,7 +20,7 @@ public class ControladorSaludo {
 	    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
 	            Model model) {
 	        model.addAttribute("name", name);
-	        return "greeting";
+	        return "saludo";
 	    }
 
 }
