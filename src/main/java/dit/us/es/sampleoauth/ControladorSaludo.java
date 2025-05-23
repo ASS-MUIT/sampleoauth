@@ -5,6 +5,8 @@
  */
 package dit.us.es.sampleoauth;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class ControladorSaludo {
-
-	 @GetMapping("/")
-	    public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
-	            Model model) {
-	        model.addAttribute("name", name);
-	        return "saludo";
-	    }
-
+	@GetMapping("/")
+	public String greeting(@AuthenticationPrincipal OidcUser oidcUser, Model model) {
+	
+	    model.addAttribute("email", oidcUser.getEmail()); //dirección email del usuario
+	    model.addAttribute("username", oidcUser.getClaimAsString("username")); //Nombre del usuario
+	    model.addAttribute("userAttributes", oidcUser.getAttributes()); // TODOS
+	    return "saludo";
+	}
 }

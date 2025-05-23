@@ -1,23 +1,40 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Demostrador OAuth: Máster de seguridad</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Demostrador OAuth: Máster Propio en Seguridad</title>
+    <meta charset="UTF-8" />
 </head>
 
-<body>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
 
-    <div sec:authorize="isAuthenticated()">
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Logout" />
-        </form>
+    <!-- Cabecera -->
+    <div style="text-align: center; padding: 20px;">
+        <h1 style="color: #2c3e50;">🔐 Demostrador OAuth2 con WSO2 IS</h1>
+        <h2 style="color: #34495e;">Máster en Seguridad en la Información y las Comunicaciones</h2>
+        <img src="/logoMaster.png" alt="Logo Máster" width="700">
+        <p style="font-size: 18px; color: #555;">Bienvenido/a, <strong><span th:text="${username}">usuario</span></strong></p>
     </div>
 
+    <!-- Información del usuario -->
+    <div style="background-color: white; border-radius: 8px; padding: 20px; max-width: 700px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+       	<p>Tu email es: <span th:text="${email}"></span></p>
 
-    <p th:text="|Hola, ${#authentication.principal.attributes['username']}! Bienvenido al Máster de Seguridad|" />
+        <h3 style="margin-top: 30px; color: #2c3e50;">Atributos recibidos de WSO2 IS:</h3>
+        <p style="color: #666;">El scope <code>openid</code> me proporciona los siguientes atributos:</p>
+
+        <ul style="list-style: none; padding-left: 0;">
+            <li th:each="entry : ${userAttributes}" style="margin: 8px 0; border-bottom: 1px solid #eee; padding-bottom: 5px;">
+                <strong th:text="${entry.key}" style="color: #333;"></strong>: <span th:text="${entry.value}" style="color: #555;"></span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Enlace de logout -->
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="/endsso" style="display: inline-block; background-color: #e74c3c; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+            🚪 Cerrar sesión
+        </a>
+    </div>
 
 </body>
-
 </html>
-
