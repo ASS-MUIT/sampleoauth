@@ -40,6 +40,7 @@ public class LogoutController {
         System.out.println("Token a: "+idTokenA);
         String idTokenB = oidcUser.getClaimAsString("isk");
         System.out.println("Token b: "+idTokenB);
+	System.out.println("postLogoutRedirectUri "+postLogoutRedirectUri);
         String redirectUrl = UriComponentsBuilder
                 .fromUriString(logoutEndpoint)
                 .queryParam("id_token_hint", idTokenA)
